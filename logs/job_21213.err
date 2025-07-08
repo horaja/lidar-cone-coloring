@@ -1,0 +1,21 @@
+
+
+==> WARNING: A newer version of conda exists. <==
+  current version: 23.3.1
+  latest version: 25.5.1
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+Or to minimize the number of packages updated during conda update use
+
+     conda install conda=25.5.1
+
+
+ERROR: Cannot install torch==2.6.0+cu124 and torchvision==0.20.0+cu124 because these package versions have conflicting dependencies.
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts
+Traceback (most recent call last):
+  File "/user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring/train.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

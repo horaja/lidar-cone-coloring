@@ -1,0 +1,590 @@
+--- Starting Slurm Job: lidar_cone_color_training (ID: 21214) ---
+Running on host: mind-1-15
+Allocated GPUs: 0
+Modules loaded.
+Current working directory: /user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring
+Conda environment 'lidar_cone_env' activated.
+Python executable: /home/horaja/.conda/envs/lidar_cone_env/bin/python
+Python version: Python 3.9.23
+Installing dependencies...
+Looking in indexes: https://download.pytorch.org/whl/cu124
+Collecting torch==2.6.0+cu124
+  Downloading https://download.pytorch.org/whl/cu124/torch-2.6.0%2Bcu124-cp39-cp39-linux_x86_64.whl.metadata (28 kB)
+Collecting torchvision==0.21.0+cu124
+  Downloading https://download.pytorch.org/whl/cu124/torchvision-0.21.0%2Bcu124-cp39-cp39-linux_x86_64.whl.metadata (6.1 kB)
+Collecting torchaudio==2.6.0+cu124
+  Downloading https://download.pytorch.org/whl/cu124/torchaudio-2.6.0%2Bcu124-cp39-cp39-linux_x86_64.whl.metadata (6.6 kB)
+Collecting filelock (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/filelock-3.13.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting typing-extensions>=4.10.0 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/typing_extensions-4.12.2-py3-none-any.whl.metadata (3.0 kB)
+Collecting networkx (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/networkx-3.2.1-py3-none-any.whl.metadata (5.2 kB)
+Collecting jinja2 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/Jinja2-3.1.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting fsspec (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/fsspec-2024.6.1-py3-none-any.whl.metadata (11 kB)
+Collecting nvidia-cuda-nvrtc-cu12==12.4.127 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cuda_nvrtc_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (24.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.6/24.6 MB 104.9 MB/s eta 0:00:00
+Collecting nvidia-cuda-runtime-cu12==12.4.127 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cuda_runtime_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (883 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 883.7/883.7 kB 124.0 MB/s eta 0:00:00
+Collecting nvidia-cuda-cupti-cu12==12.4.127 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cuda_cupti_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (13.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.8/13.8 MB 117.2 MB/s eta 0:00:00
+Collecting nvidia-cudnn-cu12==9.1.0.70 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cudnn_cu12-9.1.0.70-py3-none-manylinux2014_x86_64.whl (664.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 664.8/664.8 MB 117.1 MB/s eta 0:00:00
+Collecting nvidia-cublas-cu12==12.4.5.8 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cublas_cu12-12.4.5.8-py3-none-manylinux2014_x86_64.whl (363.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 363.4/363.4 MB 117.1 MB/s eta 0:00:00
+Collecting nvidia-cufft-cu12==11.2.1.3 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cufft_cu12-11.2.1.3-py3-none-manylinux2014_x86_64.whl (211.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 211.5/211.5 MB 117.1 MB/s eta 0:00:00
+Collecting nvidia-curand-cu12==10.3.5.147 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_curand_cu12-10.3.5.147-py3-none-manylinux2014_x86_64.whl (56.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.3/56.3 MB 117.1 MB/s eta 0:00:00
+Collecting nvidia-cusolver-cu12==11.6.1.9 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cusolver_cu12-11.6.1.9-py3-none-manylinux2014_x86_64.whl (127.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 127.9/127.9 MB 117.1 MB/s eta 0:00:00
+Collecting nvidia-cusparse-cu12==12.3.1.170 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cusparse_cu12-12.3.1.170-py3-none-manylinux2014_x86_64.whl (207.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 207.5/207.5 MB 117.1 MB/s eta 0:00:00
+Collecting nvidia-cusparselt-cu12==0.6.2 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_cusparselt_cu12-0.6.2-py3-none-manylinux2014_x86_64.whl.metadata (6.8 kB)
+Collecting nvidia-nccl-cu12==2.21.5 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/nvidia_nccl_cu12-2.21.5-py3-none-manylinux2014_x86_64.whl (188.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 188.7/188.7 MB 117.1 MB/s eta 0:00:00
+Collecting nvidia-nvtx-cu12==12.4.127 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_nvtx_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (99 kB)
+Collecting nvidia-nvjitlink-cu12==12.4.127 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/cu124/nvidia_nvjitlink_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl (21.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 21.1/21.1 MB 117.3 MB/s eta 0:00:00
+Collecting triton==3.2.0 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/triton-3.2.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (1.4 kB)
+Collecting sympy==1.13.1 (from torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/sympy-1.13.1-py3-none-any.whl (6.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.2/6.2 MB 117.8 MB/s eta 0:00:00
+Requirement already satisfied: numpy in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from torchvision==0.21.0+cu124) (2.0.2)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from torchvision==0.21.0+cu124) (11.3.0)
+Collecting mpmath<1.4,>=1.1.0 (from sympy==1.13.1->torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/mpmath-1.3.0-py3-none-any.whl (536 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 124.2 MB/s eta 0:00:00
+Collecting MarkupSafe>=2.0 (from jinja2->torch==2.6.0+cu124)
+  Downloading https://download.pytorch.org/whl/MarkupSafe-2.1.5-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Downloading https://download.pytorch.org/whl/cu124/torch-2.6.0%2Bcu124-cp39-cp39-linux_x86_64.whl (768.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 768.4/768.4 MB 117.1 MB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/cu124/torchvision-0.21.0%2Bcu124-cp39-cp39-linux_x86_64.whl (7.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.3/7.3 MB 116.9 MB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/cu124/torchaudio-2.6.0%2Bcu124-cp39-cp39-linux_x86_64.whl (3.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 52.9 MB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/cu124/nvidia_cusparselt_cu12-0.6.2-py3-none-manylinux2014_x86_64.whl (150.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 150.1/150.1 MB 117.1 MB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/triton-3.2.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (166.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 166.6/166.6 MB 62.2 MB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/typing_extensions-4.12.2-py3-none-any.whl (37 kB)
+Downloading https://download.pytorch.org/whl/filelock-3.13.1-py3-none-any.whl (11 kB)
+Downloading https://download.pytorch.org/whl/fsspec-2024.6.1-py3-none-any.whl (177 kB)
+Downloading https://download.pytorch.org/whl/Jinja2-3.1.4-py3-none-any.whl (133 kB)
+Downloading https://download.pytorch.org/whl/networkx-3.2.1-py3-none-any.whl (1.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 119.4 MB/s eta 0:00:00
+Installing collected packages: triton, nvidia-cusparselt-cu12, mpmath, typing-extensions, sympy, nvidia-nvtx-cu12, nvidia-nvjitlink-cu12, nvidia-nccl-cu12, nvidia-curand-cu12, nvidia-cufft-cu12, nvidia-cuda-runtime-cu12, nvidia-cuda-nvrtc-cu12, nvidia-cuda-cupti-cu12, nvidia-cublas-cu12, networkx, MarkupSafe, fsspec, filelock, nvidia-cusparse-cu12, nvidia-cudnn-cu12, jinja2, nvidia-cusolver-cu12, torch, torchvision, torchaudio
+
+Successfully installed MarkupSafe-2.1.5 filelock-3.13.1 fsspec-2024.6.1 jinja2-3.1.4 mpmath-1.3.0 networkx-3.2.1 nvidia-cublas-cu12-12.4.5.8 nvidia-cuda-cupti-cu12-12.4.127 nvidia-cuda-nvrtc-cu12-12.4.127 nvidia-cuda-runtime-cu12-12.4.127 nvidia-cudnn-cu12-9.1.0.70 nvidia-cufft-cu12-11.2.1.3 nvidia-curand-cu12-10.3.5.147 nvidia-cusolver-cu12-11.6.1.9 nvidia-cusparse-cu12-12.3.1.170 nvidia-cusparselt-cu12-0.6.2 nvidia-nccl-cu12-2.21.5 nvidia-nvjitlink-cu12-12.4.127 nvidia-nvtx-cu12-12.4.127 sympy-1.13.1 torch-2.6.0+cu124 torchaudio-2.6.0+cu124 torchvision-0.21.0+cu124 triton-3.2.0 typing-extensions-4.12.2
+Requirement already satisfied: numpy in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (2.0.2)
+Requirement already satisfied: matplotlib in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (3.9.4)
+Requirement already satisfied: scipy in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (1.13.1)
+Requirement already satisfied: opencv-python-headless in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (4.12.0.88)
+Requirement already satisfied: contourpy>=1.0.1 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (1.3.0)
+Requirement already satisfied: cycler>=0.10 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (4.58.5)
+Requirement already satisfied: kiwisolver>=1.3.1 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (1.4.7)
+Requirement already satisfied: packaging>=20.0 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (25.0)
+Requirement already satisfied: pillow>=8 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (11.3.0)
+Requirement already satisfied: pyparsing>=2.3.1 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (3.2.3)
+Requirement already satisfied: python-dateutil>=2.7 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (2.9.0.post0)
+Requirement already satisfied: importlib-resources>=3.2.0 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from matplotlib) (6.5.2)
+Requirement already satisfied: zipp>=3.1.0 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from importlib-resources>=3.2.0->matplotlib) (3.23.0)
+Requirement already satisfied: six>=1.5 in /home/horaja/.conda/envs/lidar_cone_env/lib/python3.9/site-packages (from python-dateutil>=2.7->matplotlib) (1.17.0)
+Dependencies installed.
+--- Starting Python Training Script ---
+--- Starting Training on cuda ---
+Hyperparameters: {'num_classes': 3, 'epochs': 70, 'batch_size': 64, 'lr': 0.001, 'num_train_samples': 10000, 'num_val_samples': 100, 'log_dir': 'logs/job_run_21214', 'model_save_path': 'models/cone_classifier_21214.pth'}
+Epoch [1/70], Loss: 0.5208
+Epoch [2/70], Loss: 0.1683
+Epoch [3/70], Loss: 0.1100
+Epoch [4/70], Loss: 0.0974
+Epoch [5/70], Loss: 0.0862
+Epoch [6/70], Loss: 0.0754
+Epoch [7/70], Loss: 0.0616
+Epoch [8/70], Loss: 0.0696
+Epoch [9/70], Loss: 0.0672
+Epoch [10/70], Loss: 0.0433
+Epoch [11/70], Loss: 0.0854
+Epoch [12/70], Loss: 0.0656
+Epoch [13/70], Loss: 0.0601
+Epoch [14/70], Loss: 0.0371
+Epoch [15/70], Loss: 0.0587
+Epoch [16/70], Loss: 0.0695
+Epoch [17/70], Loss: 0.0519
+Epoch [18/70], Loss: 0.0513
+Epoch [19/70], Loss: 0.0521
+Epoch [20/70], Loss: 0.0409
+Epoch [21/70], Loss: 0.0413
+Epoch [22/70], Loss: 0.0488
+Epoch [23/70], Loss: 0.0319
+Epoch [24/70], Loss: 0.0524
+Epoch [25/70], Loss: 0.0378
+Epoch [26/70], Loss: 0.0257
+Epoch [27/70], Loss: 0.0307
+Epoch [28/70], Loss: 0.0251
+Epoch [29/70], Loss: 0.0404
+Epoch [30/70], Loss: 0.0563
+Epoch [31/70], Loss: 0.0370
+Epoch [32/70], Loss: 0.0345
+Epoch [33/70], Loss: 0.0379
+Epoch [34/70], Loss: 0.0399
+Epoch [35/70], Loss: 0.0330
+Epoch [36/70], Loss: 0.0355
+Epoch [37/70], Loss: 0.0493
+Epoch [38/70], Loss: 0.0446
+Epoch [39/70], Loss: 0.0291
+Epoch [40/70], Loss: 0.0288
+Epoch [41/70], Loss: 0.0500
+Epoch [42/70], Loss: 0.0338
+Epoch [43/70], Loss: 0.0234
+Epoch [44/70], Loss: 0.0347
+Epoch [45/70], Loss: 0.0204
+Epoch [46/70], Loss: 0.0344
+Epoch [47/70], Loss: 0.0297
+Epoch [48/70], Loss: 0.0408
+Epoch [49/70], Loss: 0.0452
+Epoch [50/70], Loss: 0.0360
+Epoch [51/70], Loss: 0.0234
+Epoch [52/70], Loss: 0.0313
+Epoch [53/70], Loss: 0.0342
+Epoch [54/70], Loss: 0.0295
+Epoch [55/70], Loss: 0.0289
+Epoch [56/70], Loss: 0.0162
+Epoch [57/70], Loss: 0.0306
+Epoch [58/70], Loss: 0.0418
+Epoch [59/70], Loss: 0.0376
+Epoch [60/70], Loss: 0.0245
+Epoch [61/70], Loss: 0.0244
+Epoch [62/70], Loss: 0.0181
+Epoch [63/70], Loss: 0.0157
+Epoch [64/70], Loss: 0.0285
+Epoch [65/70], Loss: 0.0237
+Epoch [66/70], Loss: 0.0297
+Epoch [67/70], Loss: 0.0321
+Epoch [68/70], Loss: 0.0483
+Epoch [69/70], Loss: 0.0232
+Epoch [70/70], Loss: 0.0285
+--- Training Finished ---
+Model saved to models/cone_classifier_21214.pth
+\n--- Running Validation on 100 New Samples ---
+\n--- Sample 1/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 2/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 3/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 4/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 5/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 72.71%
+\n--- Sample 6/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 7/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 8/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 99.72%
+\n--- Sample 9/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 10/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 11/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 12/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 13/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 14/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 15/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 16/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 17/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 18/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 19/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 20/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 21/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 22/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 23/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 24/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 25/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 26/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 27/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 28/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 29/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 99.98%
+\n--- Sample 30/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 31/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 99.96%
+\n--- Sample 32/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 33/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 99.99%
+\n--- Sample 34/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 35/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 36/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 37/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.95%
+\n--- Sample 38/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 39/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 98.17%
+\n--- Sample 40/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.94%
+\n--- Sample 41/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 42/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 99.94%
+\n--- Sample 43/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.97%
+\n--- Sample 44/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 45/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 46/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 47/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 48/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 99.87%
+\n--- Sample 49/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 50/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 51/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 52/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 53/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 54/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 55/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 56/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 57/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 58/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 59/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 60/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 61/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 62/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 63/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 64/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 65/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 66/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 99.98%
+\n--- Sample 67/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 68/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 99.98%
+\n--- Sample 69/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 99.99%
+\n--- Sample 70/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 99.99%
+\n--- Sample 71/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.97%
+\n--- Sample 72/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 73/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 74/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 75/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 76/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 77/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.99%
+\n--- Sample 78/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 79/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 80/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 81/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 82/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.99%
+\n--- Sample 83/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 84/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.99%
+\n--- Sample 85/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 86/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 99.99%
+\n--- Sample 87/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 99.97%
+\n--- Sample 88/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 94.17%
+\n--- Sample 89/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 90/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 91/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 92/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 93/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.99%
+\n--- Sample 94/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Sample 95/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 96/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 97/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 100.00%
+\n--- Sample 98/100 ---
+Actual Class: 'Unknown' (Label: 2)
+Predicted Class: 'Unknown' (Label: 2)
+Confidence: 100.00%
+\n--- Sample 99/100 ---
+Actual Class: 'Yellow' (Label: 1)
+Predicted Class: 'Yellow' (Label: 1)
+Confidence: 99.80%
+\n--- Sample 100/100 ---
+Actual Class: 'Blue' (Label: 0)
+Predicted Class: 'Blue' (Label: 0)
+Confidence: 100.00%
+\n--- Validation Finished ---
+Overall Accuracy: 99.00% (99/100)
+--- Python script completed ---
+--- Slurm Job Finished ---
