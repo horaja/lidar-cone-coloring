@@ -25,7 +25,6 @@ echo "Running on host: $HOSTNAME"
 echo "Allocated GPUs: $CUDA_VISIBLE_DEVICES"
 
 # --- Environment Setup ---
-module purge
 module load anaconda3-2023.03
 module load cuda-12.4
 echo "Modules loaded."
@@ -34,13 +33,8 @@ echo "Modules loaded."
 cd /user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring
 echo "Current working directory: $(pwd)"
 
-# Create and Activate Conda Environment
-CONDA_ENV_NAME="lidar_cone_env"
-if [ ! -d "$HOME/.conda/envs/${CONDA_ENV_NAME}" ]; then
-  echo "Creating new conda environment '${CONDA_ENV_NAME}' with Python 3.9..."
-  conda create -n ${CONDA_ENV_NAME} python=3.9 -y
-fi
-source activate ${CONDA_ENV_NAME}
+# Activate Conda Environment
+conda activate ${CONDA_ENV_NAME}
 echo "Conda environment '${CONDA_ENV_NAME}' activated."
 echo "Python executable: $(which python)"
 echo "Python version: $(python --version)"
