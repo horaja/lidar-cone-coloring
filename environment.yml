@@ -1,0 +1,23 @@
+name: lidar_cone_env
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  # --- Core & CUDA ---
+  - python=3.9
+  - pip
+  - pytorch-cuda=12.1
+
+  # --- Key Libraries (Pinned for Speed & Stability) ---
+  - pytorch=2.1.2
+  - torchvision=0.16.2
+  - torchaudio=2.1.2
+  - numpy=1.24
+  - scipy=1.11
+  - scikit-learn=1.3
+  - matplotlib
+  - opencv
+  
+  # --- System/Compiler Libs ---
+  - libgcc-ng

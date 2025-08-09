@@ -3,6 +3,8 @@
 *.pth
 __pycache__/
 
+.empty
+
 data/
 
 logs/

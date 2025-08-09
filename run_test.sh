@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Job name
-#SBATCH --job-name=lidar_cone_color_training
+#SBATCH --job-name=lidar_cone_color_testing
 ## Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-type=FAIL,END
 #SBATCH --mail-user=horaja@cs.cmu.edu
@@ -17,32 +17,31 @@
 #SBATCH -p gpu
 
 # Standard output and error log files
-#SBATCH --output="/user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring/logs/train_%j.out"
-#SBATCH --error="/user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring/logs/train_%j.err"
+#SBATCH --output="/user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring/logs/test_%j.out"
+#SBATCH --error="/user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring/logs/test_%j.err"
 
 # --- Configuration Variables ---
 export CONDA_ENV_NAME="lidar_cone_env"
 export DATA_DIR="data"
-export EPOCHS=100
-export BATCH_SIZE=32
-export LEARNING_RATE=0.001
-export VAL_SPLIT=0.2 # 20% of the data will be used for validation
+export MODEL_PATH="models/cone_classifier_62300.pth" 
 
 echo "--- Starting Slurm Job: $SLURM_JOB_NAME (ID: $SLURM_JOB_ID) ---"
 echo "Running on host: $HOSTNAME"
 echo "Allocated GPUs: $CUDA_VISIBLE_DEVICES"
 
-# --- Environment Setup ---
-# Initialize Mamba/Conda from your personal installation. No module loads needed.
+# # --- Environment Setup --- - don't need cuz of mamba?
+# module load anaconda3-2023.03
+# module load cuda-12.4
+# echo "Modules loaded."
+
 eval "$(conda shell.bash hook)"
 
 # Change to the project directory
 cd /user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring
 echo "Current working directory: $(pwd)"
 
-# Create a clean environment from the YAML file using Mamba.
-# The --force flag will overwrite the environment if it already exists, ensuring a fresh start.
-echo "Creating Conda environment '${CONDA_ENV_NAME}' with mamba..."
+# Create Conda environment
+echo "Setting up Conda environment '${CONDA_ENV_NAME}' with mamba..."
 mamba env update -f environment.yml || mamba env create -f environment.yml
 
 # Activate Conda Environment
@@ -50,22 +49,13 @@ conda activate ${CONDA_ENV_NAME}
 echo "Conda environment '${CONDA_ENV_NAME}' activated."
 echo "Python executable: $(which python)"
 
-# --- Run Training Script ---
-echo "--- Starting Python Training Script ---"
-
-# Define a unique log directory for this job's artifacts
-LOG_DIR="logs/job_run_${SLURM_JOB_ID}"
-MODEL_SAVE_PATH="models/cone_classifier_${SLURM_JOB_ID}.pth"
+# --- Run Testing Script ---
+echo "--- Starting Python Test Script ---"
 
 # Run the training script with specified arguments
-python train.py \
+python test_latency.py \
   --data_dir ${DATA_DIR} \
-  --epochs ${EPOCHS} \
-  --batch_size ${BATCH_SIZE} \
-  --lr ${LEARNING_RATE} \
-  --val_split ${VAL_SPLIT} \
-  --log_dir ${LOG_DIR} \
-  --model_save_path ${MODEL_SAVE_PATH}
+  --model_path ${MODEL_PATH}
 
 echo "--- Python script completed ---"
 
