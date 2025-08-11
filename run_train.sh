@@ -34,7 +34,8 @@ echo "Allocated GPUs: $CUDA_VISIBLE_DEVICES"
 
 # --- Environment Setup ---
 # Initialize Mamba/Conda from your personal installation. No module loads needed.
-eval "$(conda shell.bash hook)"
+echo "Setting up environment: ${CONDA_ENV_NAME}"
+eval "$(mamba shell hook --shell bash)"
 
 # Change to the project directory
 cd /user_data/horaja/workspace/CMR/LiDAR_Cone_Coloring
@@ -43,7 +44,7 @@ echo "Current working directory: $(pwd)"
 # Create a clean environment from the YAML file using Mamba.
 # The --force flag will overwrite the environment if it already exists, ensuring a fresh start.
 echo "Creating Conda environment '${CONDA_ENV_NAME}' with mamba..."
-mamba env update -f environment.yml || mamba env create -f environment.yml
+mamba env update -f environment.yml || mamba env create -f environment.yml -y
 
 # Activate Conda Environment
 conda activate ${CONDA_ENV_NAME}
@@ -70,5 +71,4 @@ python train.py \
 echo "--- Python script completed ---"
 
 # Deactivate conda environment
-conda deactivate
 echo "--- Slurm Job Finished ---"
